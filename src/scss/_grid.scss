@@ -1,0 +1,66 @@
+@import "mixins";
+
+%clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  @include border-box;
+}
+
+[class*='col-'] {
+  float: left;
+  padding: 1em;
+  width: 100%;
+  min-height: 1px;
+}
+
+.container{
+  max-width:100%;
+  margin: auto;
+  @include screen-tablet{
+    max-width:540px;
+  }
+  @include screen-desktop{
+    max-width:960px;
+  }
+  .row{
+    @extend %clearfix;
+  }
+}
+
+@for $i from 1 through 12 {
+  @include screen-phone {
+    .col-xs-#{$i} {
+      width: 100% / 12 * $i;
+    }
+  }
+}
+
+@for $i from 1 through 12 {
+  @include screen-tablet {
+    .col-sm-#{$i} {
+      width: 100% / 12 * $i;
+    }
+  }
+}
+
+@for $i from 1 through 12 {
+  @include screen-desktop {
+    .col-md-#{$i} {
+      width: 100% / 12 * $i;
+    }
+  }
+}
